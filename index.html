@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图形化创建</title>
+    <link href="./css/index.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="editor">
+        <nav class="tools">
+            <a href="javascript:" class="graphic-object" type="Line">直线</a>
+            <a href="javascript:" class="graphic-object" type="Circle">圆</a>
+            <a href="javascript:" class="graphic-object" type="Ellipse">椭圆</a>
+            <a href="javascript:" class="graphic-object" type="Triangle">三角</a>
+            <a href="javascript:" class="graphic-object" type="Rect">矩形</a>
+            <a href="javascript:" class="graphic-object" type="Square">正方形</a>
+            <a href="javascript:" class="graphic-object" type="Image">图片</a>
+            <a href="javascript:" class="graphic-object" type="Text">文字</a>
+            <a href="javascript:" class="graphic-object" type="TextBox">文本框</a>
+            <button class="delete">Delete</button>
+        </nav>
+        <input type="file" name="image" class="hidden" />
+        <section class="canvas-area">
+            <canvas id="mainCanvas"></canvas>
+        </section>
+        <section class="inspector-area">
+            <div class="inspector inspector-text">
+                <label>X
+                    <input type="text" class="left">
+                </label>
+                <label>Y
+                    <input type="text" class="top">
+                </label>
+                <label>文字：
+                    <input type="text" class="text">
+                </label>
+                <label>字体大小：
+                    <input type="text" class="font-size">
+                </label>
+                <button class="center-h">水平居中</button>
+                <button class="center-v">垂直居中</button>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
