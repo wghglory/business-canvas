@@ -39,7 +39,7 @@ export default class Inspector {
     }
 
     static syncInspectorToCanvas(businessCanvas) {
-        Inspector.doms.$left.on('change', function () {
+        Inspector.doms.$left.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject();
             const left = parseInt($.trim($(this).val()), 10);
             activeObj.set({
@@ -48,7 +48,7 @@ export default class Inspector {
             businessCanvas.canvas.renderAll();
         });
 
-        Inspector.doms.$top.on('change', function () {
+        Inspector.doms.$top.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject();
             const top = parseInt($.trim($(this).val()), 10);
             activeObj.set({
@@ -57,14 +57,14 @@ export default class Inspector {
             businessCanvas.canvas.renderAll();
         });
 
-        Inspector.doms.$text.on('change', function () {
+        Inspector.doms.$text.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject();
             const text = $.trim($(this).val());
             activeObj.setText(text);
             businessCanvas.canvas.renderAll();
         });
 
-        Inspector.doms.$fontSize.on('change', function () {
+        Inspector.doms.$fontSize.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject();
             let size = $.trim($(this).val());
             size = parseInt(size, 10);
@@ -74,12 +74,12 @@ export default class Inspector {
             businessCanvas.canvas.renderAll();
         });
 
-        Inspector.doms.$centerH.on('click', function () {
+        Inspector.doms.$centerH.on('click', function() {
             const activeObj = businessCanvas.canvas.getActiveObject();
             activeObj.viewportCenterH();
         });
 
-        Inspector.doms.$centerV.on('click', function () {
+        Inspector.doms.$centerV.on('click', function() {
             const activeObj = businessCanvas.canvas.getActiveObject();
             activeObj.viewportCenterV();
         });

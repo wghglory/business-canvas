@@ -1,7 +1,5 @@
 import $ from 'jquery';
-import {
-    fabric
-} from 'fabric';
+import { fabric } from 'fabric';
 
 import CanvasImage from './FabricGraphs/CanvasImage';
 import GraphFactory from './FabricGraphs/GraphFactory';

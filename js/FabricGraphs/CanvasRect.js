@@ -1,7 +1,5 @@
 import Graph from './Graph';
-import {
-    fabric
-} from 'fabric';
+import { fabric } from 'fabric';
 
 export default class CanvasRect extends Graph {
     constructor({
