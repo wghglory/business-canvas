@@ -4,15 +4,8 @@ import {
     fabric
 } from 'fabric';
 
-import CanvasCircle from './CanvasCircle';
-import CanvasEllipse from './CanvasEllipse';
-import CanvasLine from './CanvasLine';
-import CanvasTriangle from './CanvasTriangle';
-import CanvasRect from './CanvasRect';
-import CanvasSquare from './CanvasSquare';
-import CanvasText from './CanvasText';
-import CanvasTextbox from './CanvasTextBox';
 import CanvasImage from './CanvasImage';
+import GraphFactory from './GraphFactory';
 
 class BusinessCanvas {
     constructor() {
@@ -46,7 +39,7 @@ class BusinessCanvas {
         this.canvas = new fabric.Canvas('mainCanvas');
 
         this.bindDeleteObject.call(this);
-        this.bindCreatorClick();
+        this.bindToolsClick();
         this.bindImageUpload();
     }
 
@@ -66,77 +59,24 @@ class BusinessCanvas {
         this.doms.$inspectorArea.hide();
     }
 
-    bindCreatorClick() {
+    bindToolsClick() {
         const _instance = this;
         this.doms.$creators.on('click', function () {
-            // _instance.activeObject = new GraphFactory({}).createGraph($(this).attr('type'));
-            // _instance.syncCanvasToInspector(_instance.activeObject);
-            // _instance.syncInspectorToCanvas();
-            // _instance.render(_instance.activeObject);
-            _instance.createGraphObject.call(_instance, $(this).attr('type'));
+            const type = $(this).attr('type');
+
+            if (type === 'Image') {
+                _instance.doms.$fileUploader.trigger('click');
+                return;
+            }
+
+            _instance.activeObject = GraphFactory.createGraph(type);
+
+            if (_instance.activeObject) {
+                _instance.syncCanvasToInspector(_instance.activeObject);
+                _instance.syncInspectorToCanvas();
+                _instance.render(_instance.activeObject);
+            }
         });
-    }
-
-    createGraphObject(type) {
-        // Create Image
-        if (type === 'Image') {
-            this.doms.$fileUploader.trigger('click');
-            return;
-        }
-
-        // Other types 
-        switch (type) {
-            case 'Line':
-                this.activeObject = new CanvasLine({
-                    x1: 10,
-                    y1: 10,
-                    x2: 100,
-                    y2: 10
-                }).createGraph();
-                break;
-            case 'Circle':
-                this.activeObject = new CanvasCircle({
-                    radius: 50
-                }).createGraph();
-                break;
-            case 'Ellipse':
-                this.activeObject = new CanvasEllipse({
-                    rx: 50,
-                    ry: 25
-                }).createGraph();
-                break;
-            case 'Triangle':
-                this.activeObject = new CanvasTriangle({
-                    width: 50,
-                    height: 95
-                }).createGraph();
-                break;
-            case 'Rect':
-                this.activeObject = new CanvasRect({
-                    width: 100,
-                    height: 150
-                }).createGraph();
-                break;
-            case 'Square':
-                this.activeObject = new CanvasSquare({
-                    length: 48
-                }).createGraph();
-                break;
-            case 'Text':
-                this.activeObject = new CanvasText({
-                    text: 'hello'
-                }).createGraph();
-                break;
-            case 'Textbox':
-                this.activeObject = new CanvasTextbox({}).createGraph();
-                break;
-            default:
-                break;
-        }
-
-        this.syncCanvasToInspector(this.activeObject);
-        this.syncInspectorToCanvas();
-        this.render(this.activeObject);
     }
 
     bindImageUpload() {
