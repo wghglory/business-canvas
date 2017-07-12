@@ -1,8 +1,8 @@
 import $ from 'jquery'
 import { fabric } from 'fabric'
 
-import CanvasImage from './FabricGraphs/CanvasImage'
-import GraphFactory from './FabricGraphs/GraphFactory'
+import CanvasImage from './FabricGraphics/CanvasImage'
+import GraphicFactory from './FabricGraphics/GraphicFactory'
 import Inspector from './Inspector'
 
 export default class BusinessCanvas {
@@ -27,7 +27,7 @@ export default class BusinessCanvas {
         this.canvas = new fabric.Canvas('mainCanvas')
 
         Inspector.bindDeleteObject(this.canvas)
-        
+
         this.bindToolsClick()
         this.bindImageUpload()
     }
@@ -42,7 +42,7 @@ export default class BusinessCanvas {
                 return
             }
 
-            _instance.createdObj = GraphFactory.createGraph(type)
+            _instance.createdObj = GraphicFactory.createGraphic(type)
 
             if (_instance.createdObj) {
                 Inspector.syncCanvasToInspector(_instance.createdObj)
@@ -61,7 +61,7 @@ export default class BusinessCanvas {
                 const imageObj = new Image()
                 imageObj.src = event.target.result
                 imageObj.onload = () => {
-                    const image = new CanvasImage({imageObj, left: 100, top: 100, stroke: ''}).createGraph()
+                    const image = new CanvasImage({imageObj, left: 100, top: 100, stroke: ''}).createGraphic()
 
                     Inspector.syncCanvasToInspector(image)
                     _instance.render(image)

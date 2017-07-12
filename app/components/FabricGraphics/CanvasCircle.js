@@ -1,9 +1,9 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasCircle extends Graph {
+export default class CanvasCircle extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill,
@@ -12,12 +12,12 @@ export default class CanvasCircle extends Graph {
         // customize
         radius = 100
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
+        super(graphic, top, left, fill, stroke, strokeWidth)
         this.radius = radius
     }
 
-    createGraph() {
-        this.graph = new fabric.Circle({
+    createGraphic() {
+        this.graphic = new fabric.Circle({
             radius: this.radius,
             // common
             top: this.top,
@@ -26,6 +26,6 @@ export default class CanvasCircle extends Graph {
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
         })
-        return this.graph
+        return this.graphic
     }
 }

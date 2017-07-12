@@ -1,25 +1,24 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasRect extends Graph {
+export default class CanvasSquare extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill,
         stroke,
         strokeWidth,
         // customize
-        width = 100,
-        height = 200,
+        length = 100
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
-        this.width = width
-        this.height = height
+        super(graphic, top, left, fill, stroke, strokeWidth)
+        this.width = length
+        this.height = length
     }
 
-    createGraph() {
-        this.graph = new fabric.Rect({
+    createGraphic() {
+        this.graphic = new fabric.Rect({
             width: this.width,
             height: this.height,
             // common
@@ -30,6 +29,6 @@ export default class CanvasRect extends Graph {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graph
+        return this.graphic
     }
 }

@@ -1,9 +1,9 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasImage extends Graph {
+export default class CanvasImage extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill,
@@ -12,13 +12,13 @@ export default class CanvasImage extends Graph {
         // customize
         imageObj
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
+        super(graphic, top, left, fill, stroke, strokeWidth)
         this.imageObj = imageObj
         this.stroke = stroke
     }
 
-    createGraph() {
-        this.graph = new fabric.Image(this.imageObj, {
+    createGraphic() {
+        this.graphic = new fabric.Image(this.imageObj, {
             // common
             top: this.top,
             left: this.left,
@@ -26,6 +26,6 @@ export default class CanvasImage extends Graph {
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
         })
-        return this.graph
+        return this.graphic
     }
 }

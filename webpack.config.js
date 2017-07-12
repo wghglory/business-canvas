@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin') // create index.html in
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const config = {
-    entry: './js/index.js',
+    entry: './app/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -105,7 +105,7 @@ const config = {
     ]
 }
 
-/*// 1. package.json npm run build will set node env production. 
+/*// 1. package.json npm run build will set node env production.
 // 2. NODE_ENV in DefinePlugin: webpack will build this into bundle.js so React realizes it's for production now
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(

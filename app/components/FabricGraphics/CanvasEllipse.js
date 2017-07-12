@@ -1,9 +1,9 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasEllipse extends Graph {
+export default class CanvasEllipse extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill,
@@ -13,13 +13,13 @@ export default class CanvasEllipse extends Graph {
         rx = 100,
         ry = 50
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
+        super(graphic, top, left, fill, stroke, strokeWidth)
         this.rx = rx
         this.ry = ry
     }
 
-    createGraph() {
-        this.graph = new fabric.Ellipse({
+    createGraphic() {
+        this.graphic = new fabric.Ellipse({
             rx: this.rx,
             ry: this.ry,
             // common
@@ -30,6 +30,6 @@ export default class CanvasEllipse extends Graph {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graph
+        return this.graphic
     }
 }

@@ -8,9 +8,9 @@ import CanvasText from './CanvasText'
 import CanvasTextbox from './CanvasTextBox'
 // import CanvasImage from './CanvasImage';
 
-/*let GraphFactory = function () {};
+/*let GraphicFactory = function () {};
 // static class
-GraphFactory.createGraph = (type, imageObj) => {
+GraphicFactory.createGraphic = (type, imageObj) => {
     switch (type) {
         case 'Line':
             return new CanvasLine({
@@ -18,52 +18,52 @@ GraphFactory.createGraph = (type, imageObj) => {
                 y1: 10,
                 x2: 100,
                 y2: 10
-            }).createGraph();
+            }).createGraphic();
         case 'Circle':
             return new CanvasCircle({
                 radius: 50
-            }).createGraph();
+            }).createGraphic();
         case 'Ellipse':
             return new CanvasEllipse({
                 rx: 50,
                 ry: 25
-            }).createGraph();
+            }).createGraphic();
         case 'Triangle':
             return new CanvasTriangle({
                 width: 50,
                 height: 95
-            }).createGraph();
+            }).createGraphic();
         case 'Rect':
             return new CanvasRect({
                 width: 100,
                 height: 150
-            }).createGraph();
+            }).createGraphic();
         case 'Square':
             return new CanvasSquare({
                 length: 48
-            }).createGraph();
+            }).createGraphic();
         case 'Text':
             return new CanvasText({
                 text: 'hello'
-            }).createGraph();
+            }).createGraphic();
         case 'Textbox':
-            return new CanvasTextbox({}).createGraph();
+            return new CanvasTextbox({}).createGraphic();
             // case 'Image':
             // return new CanvasImage({
             //     imageObj,
             //     left: 100,
             //     top: 100,
             //     stroke: ''
-            // }).createGraph();
+            // }).createGraphic();
         default:
             return null;
     }
 };
 
-export default GraphFactory;*/
+export default GraphicFactory;*/
 
-export default class GraphFactory {
-    static createGraph(type) {
+export default class GraphicFactory {
+    static createGraphic(type) {
         switch (type) {
             case 'Line':
                 return new CanvasLine({
@@ -71,43 +71,43 @@ export default class GraphFactory {
                     y1: 10,
                     x2: 100,
                     y2: 10
-                }).createGraph()
+                }).createGraphic()
             case 'Circle':
                 return new CanvasCircle({
                     radius: 50
-                }).createGraph()
+                }).createGraphic()
             case 'Ellipse':
                 return new CanvasEllipse({
                     rx: 50,
                     ry: 25
-                }).createGraph()
+                }).createGraphic()
             case 'Triangle':
                 return new CanvasTriangle({
                     width: 50,
                     height: 95
-                }).createGraph()
+                }).createGraphic()
             case 'Rect':
                 return new CanvasRect({
                     width: 100,
                     height: 150
-                }).createGraph()
+                }).createGraphic()
             case 'Square':
                 return new CanvasSquare({
                     length: 48
-                }).createGraph()
+                }).createGraphic()
             case 'Text':
                 return new CanvasText({
                     text: 'hello'
-                }).createGraph()
+                }).createGraphic()
             case 'Textbox':
-                return new CanvasTextbox({}).createGraph()
+                return new CanvasTextbox({}).createGraphic()
                 // case 'Image':
                 // return new CanvasImage({
                 //     imageObj,
                 //     left: 100,
                 //     top: 100,
                 //     stroke: ''
-                // }).createGraph();
+                // }).createGraphic();
             default:
                 return null
         }

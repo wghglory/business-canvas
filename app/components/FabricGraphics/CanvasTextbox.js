@@ -1,9 +1,9 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasTextbox extends Graph {
+export default class CanvasTextbox extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill = '#000',
@@ -17,7 +17,7 @@ export default class CanvasTextbox extends Graph {
         textAlign = 'center',
         fixedWidth = 150
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
+        super(graphic, top, left, fill, stroke, strokeWidth)
         this.fontSize = fontSize
         this.width = width
         this.height = height
@@ -29,8 +29,8 @@ export default class CanvasTextbox extends Graph {
         this.fill = fill
     }
 
-    createGraph() {
-        this.graph = new fabric.Textbox(this.text, {
+    createGraphic() {
+        this.graphic = new fabric.Textbox(this.text, {
             fontSize: this.fontSize,
             width: this.width,
             height: this.height,
@@ -44,6 +44,6 @@ export default class CanvasTextbox extends Graph {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graph
+        return this.graphic
     }
 }

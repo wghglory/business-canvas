@@ -1,9 +1,9 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasTriangle extends Graph {
+export default class CanvasRect extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill,
@@ -11,20 +11,17 @@ export default class CanvasTriangle extends Graph {
         strokeWidth,
         // customize
         width = 100,
-        height = 100,
-        originX = 'center',
+        height = 200,
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
+        super(graphic, top, left, fill, stroke, strokeWidth)
         this.width = width
         this.height = height
-        this.originX = originX
     }
 
-    createGraph() {
-        this.graph = new fabric.Triangle({
+    createGraphic() {
+        this.graphic = new fabric.Rect({
             width: this.width,
             height: this.height,
-            originX: this.originX,
             // common
             top: this.top,
             left: this.left,
@@ -33,6 +30,6 @@ export default class CanvasTriangle extends Graph {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graph
+        return this.graphic
     }
 }

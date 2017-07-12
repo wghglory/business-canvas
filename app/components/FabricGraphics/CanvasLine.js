@@ -1,9 +1,9 @@
-import Graph from './Graph'
+import Graphic from './Graphic'
 import { fabric } from 'fabric'
 
-export default class CanvasLine extends Graph {
+export default class CanvasLine extends Graphic {
     constructor({
-        graph,
+        graphic,
         top,
         left,
         fill,
@@ -15,15 +15,15 @@ export default class CanvasLine extends Graph {
         x2,
         y2
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth)
+        super(graphic, top, left, fill, stroke, strokeWidth)
         this.x1 = x1
         this.x2 = x2
         this.y1 = y1
         this.y2 = y2
     }
 
-    createGraph() {
-        this.graph = new fabric.Line([
+    createGraphic() {
+        this.graphic = new fabric.Line([
             this.x1, this.y1, this.x2, this.y2
         ], {
             // common
@@ -33,6 +33,6 @@ export default class CanvasLine extends Graph {
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
         })
-        return this.graph
+        return this.graphic
     }
 }

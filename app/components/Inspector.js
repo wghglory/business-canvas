@@ -2,7 +2,7 @@
 import $ from 'jquery'
 
 /**
- * Note: using this as a static class if all graphs correspond to a unique Inspector
+ * Note: using this as a static class if all graphics correspond to a unique Inspector
  */
 export default class Inspector {
     static get doms() {
@@ -91,7 +91,7 @@ export default class Inspector {
 }
 
 /**
- * Note: using this as a instance class if graph to inspector 1 : 1
+ * Note: using this as a instance class if graphic to inspector 1 : 1
  */
 // export default class Inspector {
 //     constructor() {
