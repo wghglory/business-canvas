@@ -8,7 +8,8 @@ export default class Inspector {
     static get doms() {
         const _doms = {
             $inspectorArea: $('.inspector-area'),
-            $inspector: $('.inspector')
+            $inspector: $('.inspector'),
+            $deleteButton: $('.delete')
         }
         _doms.$left = _doms.$inspector.find('.left:first')
         _doms.$top = _doms.$inspector.find('.top:first')
@@ -18,6 +19,7 @@ export default class Inspector {
         _doms.$centerV = _doms.$inspector.find('.center-v')
         return _doms
     }
+
     static clearInspector() {
         Inspector.doms.$left.val('')
         Inspector.doms.$top.val('')
@@ -25,6 +27,14 @@ export default class Inspector {
         Inspector.doms.$fontSize.val('')
 
         Inspector.doms.$inspectorArea.hide()
+    }
+
+    static bindDeleteObject(canvas) {
+        Inspector.doms.$deleteButton.on('click', () => {
+            const currentObj = canvas.getActiveObject()
+            currentObj && currentObj.remove()
+            Inspector.clearInspector()
+        })
     }
 
     static syncCanvasToInspector(createdObj) {
@@ -42,18 +52,14 @@ export default class Inspector {
         Inspector.doms.$left.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             const left = parseInt($.trim($(this).val()), 10)
-            activeObj.set({
-                left: left
-            })
+            activeObj.set({left: left})
             businessCanvas.canvas.renderAll()
         })
 
         Inspector.doms.$top.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             const top = parseInt($.trim($(this).val()), 10)
-            activeObj.set({
-                top: top
-            })
+            activeObj.set({top: top})
             businessCanvas.canvas.renderAll()
         })
 
@@ -68,9 +74,7 @@ export default class Inspector {
             const activeObj = businessCanvas.canvas.getActiveObject()
             let size = $.trim($(this).val())
             size = parseInt(size, 10)
-            activeObj.set({
-                fontSize: size
-            })
+            activeObj.set({fontSize: size})
             businessCanvas.canvas.renderAll()
         })
 
@@ -93,80 +97,83 @@ export default class Inspector {
 //     constructor() {
 //         this.doms = {
 //             $inspectorArea: $('.inspector-area'),
-//             $inspector: $('.inspector')
-//         };
-//         // properties on the right 
-//         this.doms.$left = this.doms.$inspector.find('.left:first');
-//         this.doms.$top = this.doms.$inspector.find('.top:first');
-//         this.doms.$text = this.doms.$inspector.find('.text:first');
-//         this.doms.$fontSize = this.doms.$inspector.find('.font-size:first');
-//         this.doms.$centerH = this.doms.$inspector.find('.center-h');
-//         this.doms.$centerV = this.doms.$inspector.find('.center-v');
+//             $inspector: $('.inspector'),
+//             $deleteButton: $('.delete')
+//         }
+//         // properties on the right
+//         this.doms.$left = this.doms.$inspector.find('.left:first')
+//         this.doms.$top = this.doms.$inspector.find('.top:first')
+//         this.doms.$text = this.doms.$inspector.find('.text:first')
+//         this.doms.$fontSize = this.doms.$inspector.find('.font-size:first')
+//         this.doms.$centerH = this.doms.$inspector.find('.center-h')
+//         this.doms.$centerV = this.doms.$inspector.find('.center-v')
 //     }
-
+//
 //     clearInspector() {
-//         this.doms.$left.val('');
-//         this.doms.$top.val('');
-//         this.doms.$text.val('');
-//         this.doms.$fontSize.val('');
-
-//         this.doms.$inspectorArea.hide();
+//         this.doms.$left.val('')
+//         this.doms.$top.val('')
+//         this.doms.$text.val('')
+//         this.doms.$fontSize.val('')
+//
+//         this.doms.$inspectorArea.hide()
 //     }
-
-//     static syncCanvasToInspector(createdObj) {
+//
+//     bindDeleteObject(canvas) {
+//         this.doms.$deleteButton.on('click', () => {
+//             const currentObj = canvas.getActiveObject()
+//             currentObj && currentObj.remove()
+//             this.clearInspector()
+//         })
+//     }
+//
+//     syncCanvasToInspector(createdObj) {
 //         createdObj.on('selected', () => {
-//             this.doms.$left.val(createdObj.getLeft());
-//             this.doms.$top.val(createdObj.getTop());
-//             this.doms.$inspectorArea.show();
+//             this.doms.$left.val(createdObj.getLeft())
+//             this.doms.$top.val(createdObj.getTop())
+//             this.doms.$inspectorArea.show()
 //             // this.doms.$text.val(createdObj.getText())
 //             // this.doms.$fontSize.val(createdObj.get('fontSize'))
-//         });
+//         })
 //     }
-
-//     static syncInspectorToCanvas(businessCanvas) {
-//         this.doms.$left.on('change', function () {
-//             const activeObj = businessCanvas.canvas.getActiveObject();
-//             const left = parseInt($.trim($(this).val()), 10);
-//             activeObj.set({
-//                 left: left
-//             });
-//             businessCanvas.canvas.renderAll();
-//         });
-
-//         this.doms.$top.on('change', function () {
-//             const activeObj = businessCanvas.canvas.getActiveObject();
-//             const top = parseInt($.trim($(this).val()), 10);
-//             activeObj.set({
-//                 top: top
-//             });
-//             businessCanvas.canvas.renderAll();
-//         });
-
-//         this.doms.$text.on('change', function () {
-//             const activeObj = businessCanvas.canvas.getActiveObject();
-//             const text = $.trim($(this).val());
-//             activeObj.setText(text);
-//             businessCanvas.canvas.renderAll();
-//         });
-
-//         this.doms.$fontSize.on('change', function () {
-//             const activeObj = businessCanvas.canvas.getActiveObject();
-//             let size = $.trim($(this).val());
-//             size = parseInt(size, 10);
-//             activeObj.set({
-//                 fontSize: size
-//             });
-//             businessCanvas.canvas.renderAll();
-//         });
-
-//         this.doms.$centerH.on('click', function () {
-//             const activeObj = businessCanvas.canvas.getActiveObject();
-//             activeObj.viewportCenterH();
-//         });
-
-//         this.doms.$centerV.on('click', function () {
-//             const activeObj = businessCanvas.canvas.getActiveObject();
-//             activeObj.viewportCenterV();
-//         });
+//
+//     syncInspectorToCanvas(businessCanvas) {
+//         this.doms.$left.on('change', function() {
+//             const activeObj = businessCanvas.canvas.getActiveObject()
+//             const left = parseInt($.trim($(this).val()), 10)
+//             activeObj.set({left: left})
+//             businessCanvas.canvas.renderAll()
+//         })
+//
+//         this.doms.$top.on('change', function() {
+//             const activeObj = businessCanvas.canvas.getActiveObject()
+//             const top = parseInt($.trim($(this).val()), 10)
+//             activeObj.set({top: top})
+//             businessCanvas.canvas.renderAll()
+//         })
+//
+//         this.doms.$text.on('change', function() {
+//             const activeObj = businessCanvas.canvas.getActiveObject()
+//             const text = $.trim($(this).val())
+//             activeObj.setText(text)
+//             businessCanvas.canvas.renderAll()
+//         })
+//
+//         this.doms.$fontSize.on('change', function() {
+//             const activeObj = businessCanvas.canvas.getActiveObject()
+//             let size = $.trim($(this).val())
+//             size = parseInt(size, 10)
+//             activeObj.set({fontSize: size})
+//             businessCanvas.canvas.renderAll()
+//         })
+//
+//         this.doms.$centerH.on('click', function() {
+//             const activeObj = businessCanvas.canvas.getActiveObject()
+//             activeObj.viewportCenterH()
+//         })
+//
+//         this.doms.$centerV.on('click', function() {
+//             const activeObj = businessCanvas.canvas.getActiveObject()
+//             activeObj.viewportCenterV()
+//         })
 //     }
 // }

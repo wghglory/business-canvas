@@ -11,8 +11,7 @@ export default class BusinessCanvas {
             $canvasArea: $('.canvas-area'),
             $mainCanvas: $('#mainCanvas'),
             $creators: $('.graphic-object'),
-            $deleteButton: $('.delete'),
-            $fileUploader: $('input[type=file]'),
+            $fileUploader: $('input[type=file]')
         }
 
         this.objects = []
@@ -27,17 +26,10 @@ export default class BusinessCanvas {
         this.doms.$mainCanvas.attr('width', this.doms.$canvasArea.width()).attr('height', this.doms.$canvasArea.height())
         this.canvas = new fabric.Canvas('mainCanvas')
 
-        this.bindDeleteObject.call(this)
+        Inspector.bindDeleteObject(this.canvas)
+        
         this.bindToolsClick()
         this.bindImageUpload()
-    }
-
-    bindDeleteObject() {
-        this.doms.$deleteButton.on('click', () => {
-            const currentObj = this.canvas.getActiveObject()
-            currentObj && currentObj.remove()
-            Inspector.clearInspector()
-        })
     }
 
     bindToolsClick() {
@@ -69,12 +61,7 @@ export default class BusinessCanvas {
                 const imageObj = new Image()
                 imageObj.src = event.target.result
                 imageObj.onload = () => {
-                    const image = new CanvasImage({
-                        imageObj,
-                        left: 100,
-                        top: 100,
-                        stroke: ''
-                    }).createGraph()
+                    const image = new CanvasImage({imageObj, left: 100, top: 100, stroke: ''}).createGraph()
 
                     Inspector.syncCanvasToInspector(image)
                     _instance.render(image)
