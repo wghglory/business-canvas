@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
 }
@@ -39,7 +38,6 @@ body {
 
 .inspector-area {
     float: left;
-    width: 200px;
     background: #dfdfdf;
     padding: 8px;
     display: none;
