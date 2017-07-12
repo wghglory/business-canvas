@@ -1,5 +1,5 @@
-import Graph from './Graph';
-import { fabric } from 'fabric';
+import Graph from './Graph'
+import { fabric } from 'fabric'
 
 export default class CanvasRect extends Graph {
     constructor({
@@ -13,9 +13,9 @@ export default class CanvasRect extends Graph {
         width = 100,
         height = 200,
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth);
-        this.width = width;
-        this.height = height;
+        super(graph, top, left, fill, stroke, strokeWidth)
+        this.width = width
+        this.height = height
     }
 
     createGraph() {
@@ -28,8 +28,8 @@ export default class CanvasRect extends Graph {
             fill: this.fill,
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
-        });
+        })
 
-        return this.graph;
+        return this.graph
     }
 }

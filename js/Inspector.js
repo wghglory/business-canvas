@@ -1,5 +1,5 @@
-'use strict';
-import $ from 'jquery';
+'use strict'
+import $ from 'jquery'
 
 /**
  * Note: using this as a static class if all graphs correspond to a unique Inspector
@@ -9,80 +9,80 @@ export default class Inspector {
         const _doms = {
             $inspectorArea: $('.inspector-area'),
             $inspector: $('.inspector')
-        };
-        _doms.$left = _doms.$inspector.find('.left:first');
-        _doms.$top = _doms.$inspector.find('.top:first');
-        _doms.$text = _doms.$inspector.find('.text:first');
-        _doms.$fontSize = _doms.$inspector.find('.font-size:first');
-        _doms.$centerH = _doms.$inspector.find('.center-h');
-        _doms.$centerV = _doms.$inspector.find('.center-v');
-        return _doms;
+        }
+        _doms.$left = _doms.$inspector.find('.left:first')
+        _doms.$top = _doms.$inspector.find('.top:first')
+        _doms.$text = _doms.$inspector.find('.text:first')
+        _doms.$fontSize = _doms.$inspector.find('.font-size:first')
+        _doms.$centerH = _doms.$inspector.find('.center-h')
+        _doms.$centerV = _doms.$inspector.find('.center-v')
+        return _doms
     }
     static clearInspector() {
-        Inspector.doms.$left.val('');
-        Inspector.doms.$top.val('');
-        Inspector.doms.$text.val('');
-        Inspector.doms.$fontSize.val('');
+        Inspector.doms.$left.val('')
+        Inspector.doms.$top.val('')
+        Inspector.doms.$text.val('')
+        Inspector.doms.$fontSize.val('')
 
-        Inspector.doms.$inspectorArea.hide();
+        Inspector.doms.$inspectorArea.hide()
     }
 
     static syncCanvasToInspector(createdObj) {
         createdObj.on('selected', () => {
-            Inspector.doms.$left.val(createdObj.getLeft());
-            Inspector.doms.$top.val(createdObj.getTop());
-            Inspector.doms.$inspectorArea.show();
+            Inspector.doms.$left.val(createdObj.getLeft())
+            Inspector.doms.$top.val(createdObj.getTop())
+            Inspector.doms.$inspectorArea.show()
             // some don't have text or fontSize field
             // Inspector.doms.$text.val(createdObj.getText())
             // Inspector.doms.$fontSize.val(createdObj.get('fontSize'))
-        });
+        })
     }
 
     static syncInspectorToCanvas(businessCanvas) {
         Inspector.doms.$left.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject();
-            const left = parseInt($.trim($(this).val()), 10);
+            const activeObj = businessCanvas.canvas.getActiveObject()
+            const left = parseInt($.trim($(this).val()), 10)
             activeObj.set({
                 left: left
-            });
-            businessCanvas.canvas.renderAll();
-        });
+            })
+            businessCanvas.canvas.renderAll()
+        })
 
         Inspector.doms.$top.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject();
-            const top = parseInt($.trim($(this).val()), 10);
+            const activeObj = businessCanvas.canvas.getActiveObject()
+            const top = parseInt($.trim($(this).val()), 10)
             activeObj.set({
                 top: top
-            });
-            businessCanvas.canvas.renderAll();
-        });
+            })
+            businessCanvas.canvas.renderAll()
+        })
 
         Inspector.doms.$text.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject();
-            const text = $.trim($(this).val());
-            activeObj.setText(text);
-            businessCanvas.canvas.renderAll();
-        });
+            const activeObj = businessCanvas.canvas.getActiveObject()
+            const text = $.trim($(this).val())
+            activeObj.setText(text)
+            businessCanvas.canvas.renderAll()
+        })
 
         Inspector.doms.$fontSize.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject();
-            let size = $.trim($(this).val());
-            size = parseInt(size, 10);
+            const activeObj = businessCanvas.canvas.getActiveObject()
+            let size = $.trim($(this).val())
+            size = parseInt(size, 10)
             activeObj.set({
                 fontSize: size
-            });
-            businessCanvas.canvas.renderAll();
-        });
+            })
+            businessCanvas.canvas.renderAll()
+        })
 
         Inspector.doms.$centerH.on('click', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject();
-            activeObj.viewportCenterH();
-        });
+            const activeObj = businessCanvas.canvas.getActiveObject()
+            activeObj.viewportCenterH()
+        })
 
         Inspector.doms.$centerV.on('click', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject();
-            activeObj.viewportCenterV();
-        });
+            const activeObj = businessCanvas.canvas.getActiveObject()
+            activeObj.viewportCenterV()
+        })
     }
 }
 

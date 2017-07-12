@@ -1,5 +1,5 @@
-import Graph from './Graph';
-import { fabric } from 'fabric';
+import Graph from './Graph'
+import { fabric } from 'fabric'
 
 export default class CanvasTextbox extends Graph {
     constructor({
@@ -17,16 +17,16 @@ export default class CanvasTextbox extends Graph {
         textAlign = 'center',
         fixedWidth = 150
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth);
-        this.fontSize = fontSize;
-        this.width = width;
-        this.height = height;
-        this.text = text;
-        this.textAlign = textAlign;
-        this.fixedWidth = fixedWidth;
+        super(graph, top, left, fill, stroke, strokeWidth)
+        this.fontSize = fontSize
+        this.width = width
+        this.height = height
+        this.text = text
+        this.textAlign = textAlign
+        this.fixedWidth = fixedWidth
         // override base
-        this.stroke = stroke;
-        this.fill = fill;
+        this.stroke = stroke
+        this.fill = fill
     }
 
     createGraph() {
@@ -42,8 +42,8 @@ export default class CanvasTextbox extends Graph {
             fill: this.fill,
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
-        });
+        })
 
-        return this.graph;
+        return this.graph
     }
 }

@@ -1,11 +1,11 @@
-import CanvasCircle from './CanvasCircle';
-import CanvasEllipse from './CanvasEllipse';
-import CanvasLine from './CanvasLine';
-import CanvasTriangle from './CanvasTriangle';
-import CanvasRect from './CanvasRect';
-import CanvasSquare from './CanvasSquare';
-import CanvasText from './CanvasText';
-import CanvasTextbox from './CanvasTextBox';
+import CanvasCircle from './CanvasCircle'
+import CanvasEllipse from './CanvasEllipse'
+import CanvasLine from './CanvasLine'
+import CanvasTriangle from './CanvasTriangle'
+import CanvasRect from './CanvasRect'
+import CanvasSquare from './CanvasSquare'
+import CanvasText from './CanvasText'
+import CanvasTextbox from './CanvasTextBox'
 // import CanvasImage from './CanvasImage';
 
 /*let GraphFactory = function () {};
@@ -71,36 +71,36 @@ export default class GraphFactory {
                     y1: 10,
                     x2: 100,
                     y2: 10
-                }).createGraph();
+                }).createGraph()
             case 'Circle':
                 return new CanvasCircle({
                     radius: 50
-                }).createGraph();
+                }).createGraph()
             case 'Ellipse':
                 return new CanvasEllipse({
                     rx: 50,
                     ry: 25
-                }).createGraph();
+                }).createGraph()
             case 'Triangle':
                 return new CanvasTriangle({
                     width: 50,
                     height: 95
-                }).createGraph();
+                }).createGraph()
             case 'Rect':
                 return new CanvasRect({
                     width: 100,
                     height: 150
-                }).createGraph();
+                }).createGraph()
             case 'Square':
                 return new CanvasSquare({
                     length: 48
-                }).createGraph();
+                }).createGraph()
             case 'Text':
                 return new CanvasText({
                     text: 'hello'
-                }).createGraph();
+                }).createGraph()
             case 'Textbox':
-                return new CanvasTextbox({}).createGraph();
+                return new CanvasTextbox({}).createGraph()
                 // case 'Image':
                 // return new CanvasImage({
                 //     imageObj,
@@ -109,7 +109,7 @@ export default class GraphFactory {
                 //     stroke: ''
                 // }).createGraph();
             default:
-                return null;
+                return null
         }
     }
 }

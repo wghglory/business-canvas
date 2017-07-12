@@ -1,3 +1,3 @@
-'use strict';
-import BusinessCanvas from './BusinessCanvas';
-new BusinessCanvas();
+'use strict'
+import BusinessCanvas from './BusinessCanvas'
+new BusinessCanvas()

@@ -7,11 +7,11 @@ export default class Graph {
         stroke = 'red',
         strokeWidth = 1
     } = {}) {
-        this.graph = graph;
-        this.top = top;
-        this.left = left;
-        this.fill = fill;
-        this.stroke = stroke;
-        this.strokeWidth = strokeWidth;
+        this.graph = graph
+        this.top = top
+        this.left = left
+        this.fill = fill
+        this.stroke = stroke
+        this.strokeWidth = strokeWidth
     }
 }

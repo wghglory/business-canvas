@@ -1,5 +1,5 @@
-import Graph from './Graph';
-import { fabric } from 'fabric';
+import Graph from './Graph'
+import { fabric } from 'fabric'
 
 export default class CanvasText extends Graph {
     constructor({
@@ -15,14 +15,14 @@ export default class CanvasText extends Graph {
         originY = 'center',
         text = '默认文字'
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth);
-        this.fontSize = fontSize;
-        this.originX = originX;
-        this.originY = originY;
-        this.text = text;
+        super(graph, top, left, fill, stroke, strokeWidth)
+        this.fontSize = fontSize
+        this.originX = originX
+        this.originY = originY
+        this.text = text
         // override base
-        this.stroke = stroke;
-        this.fill = fill;
+        this.stroke = stroke
+        this.fill = fill
     }
 
     createGraph() {
@@ -36,8 +36,8 @@ export default class CanvasText extends Graph {
             fill: this.fill,
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
-        });
+        })
 
-        return this.graph;
+        return this.graph
     }
 }

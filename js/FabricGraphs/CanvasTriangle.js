@@ -1,5 +1,5 @@
-import Graph from './Graph';
-import { fabric } from 'fabric';
+import Graph from './Graph'
+import { fabric } from 'fabric'
 
 export default class CanvasTriangle extends Graph {
     constructor({
@@ -14,10 +14,10 @@ export default class CanvasTriangle extends Graph {
         height = 100,
         originX = 'center',
     }) {
-        super(graph, top, left, fill, stroke, strokeWidth);
-        this.width = width;
-        this.height = height;
-        this.originX = originX;
+        super(graph, top, left, fill, stroke, strokeWidth)
+        this.width = width
+        this.height = height
+        this.originX = originX
     }
 
     createGraph() {
@@ -31,8 +31,8 @@ export default class CanvasTriangle extends Graph {
             fill: this.fill,
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
-        });
+        })
 
-        return this.graph;
+        return this.graph
     }
 }

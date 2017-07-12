@@ -16,7 +16,7 @@
         "sourceType": "module"
     },
     "rules": {
-        "semi": [2, "always"],
+        "semi": [2, "never"],
         "react/display-name": 0,
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
@@ -25,6 +25,5 @@
         "no-unused-vars": "warn",
         "constructor-super": "warn",
         "valid-typeof": "warn"
-        // "react/jsx-uses-vars": [2]
     }
 }
