@@ -17,10 +17,15 @@ export default class Inspector {
         _doms.props.$width = _doms.$inspector.find('.width')
         _doms.props.$height = _doms.$inspector.find('.height')
         _doms.props.$angle = _doms.$inspector.find('.angle')
+        _doms.props.$fill = _doms.$inspector.find('.fill')
+        _doms.props.$stroke = _doms.$inspector.find('.stroke')
+        _doms.props.$strokeWidth = _doms.$inspector.find('.strokeWidth')
         _doms.props.$scaleX = _doms.$inspector.find('.scale-x')
         _doms.props.$scaleY = _doms.$inspector.find('.scale-y')
-        _doms.props.$radiusX = _doms.$inspector.find('.radius-x')
+        _doms.props.$radiusX = _doms.$inspector.find('.radius-x') // circle
         _doms.props.$radiusY = _doms.$inspector.find('.radius-y')
+        _doms.props.$rx = _doms.$inspector.find('.rx') // ellipse
+        _doms.props.$ry = _doms.$inspector.find('.ry')
         _doms.props.$text = _doms.$inspector.find('.text')
         _doms.props.$fontSize = _doms.$inspector.find('.font-size')
         _doms.props.$fontFamily = _doms.$inspector.find('.font-family')
@@ -51,8 +56,7 @@ export default class Inspector {
 
             // loop thru inspector property fields, put props' values into dom
             for (let [k, $d] of Object.entries(Inspector.doms.props)) {
-                $d.val(`${props[k.slice(1)]}`)
-                // props[k.slice(1)] && $d.val(`${props[k.slice(1)]}`)
+                $d.val(`${props[k.slice(1)]}`) // props[k.slice(1)] && $d.val(`${props[k.slice(1)]}`)
             }
 
             Inspector.doms.$inspectorArea.show()
@@ -74,41 +78,30 @@ export default class Inspector {
     }
 
     static syncInspectorToCanvas(businessCanvas) {
-        /* todo: finish others, note some property change cannot trigger fabricOjb change
-        angleControl.onchange = function() {
-            rect.setAngle(parseInt(this.value, 10)).setCoords();
-            canvas.renderAll();
-        }; */
+        // loop thru inspector property fields, put props' values into dom
+        for (let [k, $d] of Object.entries(Inspector.doms.props)) {
+            const key = k.slice(1)
+            $d.on('change', function() {
+                const activeObj = businessCanvas.canvas.getActiveObject()
 
-        Inspector.doms.props.$left.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject()
-            const left = parseInt($.trim($(this).val()), 10)
-            activeObj.set({ left: left })
-            businessCanvas.canvas.renderAll()
-        })
+                let value = $.trim($(this).val())
+                if ($(this).attr('type') === 'number') {
+                    value = parseInt(value, 10)
+                }
 
-        Inspector.doms.props.$top.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject()
-            const top = parseInt($.trim($(this).val()), 10)
-            activeObj.set({ top: top })
-            businessCanvas.canvas.renderAll()
-        })
+                if (key.includes('radius')) {
+                    activeObj.set({ 'radius': value })
+                } else {
+                    activeObj.set({
+                        [key]: value
+                    })
+                }
 
-        Inspector.doms.props.$text.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject()
-            const text = $.trim($(this).val())
-            activeObj.setText(text)
-            businessCanvas.canvas.renderAll()
-        })
+                businessCanvas.canvas.renderAll()
+            })
+        }
 
-        Inspector.doms.props.$fontSize.on('change', function() {
-            const activeObj = businessCanvas.canvas.getActiveObject()
-            let size = $.trim($(this).val())
-            size = parseInt(size, 10)
-            activeObj.set({ fontSize: size })
-            businessCanvas.canvas.renderAll()
-        })
-
+        // these 2 only sync inspector to canvas
         Inspector.doms.props.$centerH.on('click', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             activeObj.viewportCenterH()

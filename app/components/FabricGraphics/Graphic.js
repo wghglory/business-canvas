@@ -3,8 +3,8 @@ export default class Graphic {
         fabricObj, // class property that has no relationship with Fabrics. just to provide an interface 
         top = 100,
         left = 100,
-        fill = '',
-        stroke = 'red',
+        fill = '#ffffff',
+        stroke = '#000000',
         strokeWidth = 1
     } = {}) {
         this.fabricObj = fabricObj
@@ -15,6 +15,16 @@ export default class Graphic {
         this.strokeWidth = strokeWidth
     }
 
+    // initializeRadius(direction) {
+    //     if (this.fabricObj[`getRadius${direction}`]) { // circle getRadiusX
+    //         return this.fabricObj[`getRadius${direction}`]()
+    //     } else if (this.fabricObj[`getR${direction.toLowerCase()}`]) { //ellipse getRx
+    //         return this.fabricObj[`getR${direction.toLowerCase()}`]()
+    //     } else {
+    //         return 0
+    //     }
+    // }
+
     getProperties() {
         return {
             'left': this.fabricObj.getLeft ? this.fabricObj.getLeft() : 0,
@@ -24,13 +34,15 @@ export default class Graphic {
             'fill': this.fabricObj.getFill ? this.fabricObj.getFill() : '',
             'width': this.fabricObj.getWidth ? this.fabricObj.getWidth() : 0,
             'height': this.fabricObj.getHeight ? this.fabricObj.getHeight() : 0,
-            'radiusX': (this.fabricObj.getRadiusX || this.fabricObj.getRx) ? (this.fabricObj.getRadiusX() || this.fabricObj.getRx()) : 0,
-            'radiusY': (this.fabricObj.getRadiusY || this.fabricObj.getRy) ? (this.fabricObj.getRadiusY() || this.fabricObj.getRy()) : 0,
+            'radiusX': this.fabricObj.getRadiusX ? this.fabricObj.getRadiusX() : 0, // circle
+            'radiusY': this.fabricObj.getRadiusY ? this.fabricObj.getRadiusY() : 0, // circle
+            'rx': this.fabricObj.getRx ? this.fabricObj.getRx() : 0, // ellipse //this.initializeRadius('X'),
+            'ry': this.fabricObj.getRy ? this.fabricObj.getRy() : 0, // ellipse //this.initializeRadius('Y'),
             'stroke': this.fabricObj.getStroke ? this.fabricObj.getStroke() : '',
             'strokeWidth': this.fabricObj.getStrokeWidth ? this.fabricObj.getStrokeWidth() : 0,
             'scaleX': this.fabricObj.getScaleX ? this.fabricObj.getScaleX() : 0,
             'scaleY': this.fabricObj.getScaleY ? this.fabricObj.getScaleY() : 0,
-            'fontSize': this.fabricObj.getFontSize ? this.fabricObj.getFontSize() : undefined,
+            'fontSize': this.fabricObj.getFontSize ? this.fabricObj.getFontSize() : 0,
             'fontFamily': this.fabricObj.getFontFamily ? this.fabricObj.getFontFamily() : undefined
         }
     }
