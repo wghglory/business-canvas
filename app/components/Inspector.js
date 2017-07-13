@@ -9,23 +9,30 @@ export default class Inspector {
         const _doms = {
             $inspectorArea: $('.inspector-area'),
             $inspector: $('.inspector'),
-            $deleteButton: $('.delete')
+            $deleteButton: $('.delete'),
+            props: {}
         }
-        _doms.$left = _doms.$inspector.find('.left:first')
-        _doms.$top = _doms.$inspector.find('.top:first')
-        _doms.$text = _doms.$inspector.find('.text:first')
-        _doms.$fontSize = _doms.$inspector.find('.font-size:first')
-        _doms.$centerH = _doms.$inspector.find('.center-h')
-        _doms.$centerV = _doms.$inspector.find('.center-v')
+        _doms.props.$left = _doms.$inspector.find('.left')
+        _doms.props.$top = _doms.$inspector.find('.top')
+        _doms.props.$width = _doms.$inspector.find('.width')
+        _doms.props.$height = _doms.$inspector.find('.height')
+        _doms.props.$angle = _doms.$inspector.find('.angle')
+        _doms.props.$scaleX = _doms.$inspector.find('.scale-x')
+        _doms.props.$scaleY = _doms.$inspector.find('.scale-y')
+        _doms.props.$radiusX = _doms.$inspector.find('.radius-x')
+        _doms.props.$radiusY = _doms.$inspector.find('.radius-y')
+        _doms.props.$text = _doms.$inspector.find('.text')
+        _doms.props.$fontSize = _doms.$inspector.find('.font-size')
+        _doms.props.$fontFamily = _doms.$inspector.find('.font-family')
+        _doms.props.$centerH = _doms.$inspector.find('.center-h')
+        _doms.props.$centerV = _doms.$inspector.find('.center-v')
         return _doms
     }
 
     static clearInspector() {
-        Inspector.doms.$left.val('')
-        Inspector.doms.$top.val('')
-        Inspector.doms.$text.val('')
-        Inspector.doms.$fontSize.val('')
-
+        for (let [k, $d] of Object.entries(Inspector.doms.props)) {
+            $d.val('')
+        }
         Inspector.doms.$inspectorArea.hide()
     }
 
@@ -37,53 +44,77 @@ export default class Inspector {
         })
     }
 
-    static syncCanvasToInspector(createdObj) {
-        createdObj.on('selected', () => {
-            Inspector.doms.$left.val(createdObj.getLeft())
-            Inspector.doms.$top.val(createdObj.getTop())
+    static syncCanvasToInspector(graphic, fabricObj) {
+        function updateControls() {
+            // get current graphic props
+            const props = graphic.getProperties()
+
+            // loop thru inspector property fields, put props' values into dom
+            for (let [k, $d] of Object.entries(Inspector.doms.props)) {
+                $d.val(`${props[k.slice(1)]}`)
+                // props[k.slice(1)] && $d.val(`${props[k.slice(1)]}`)
+            }
+
             Inspector.doms.$inspectorArea.show()
-            // some don't have text or fontSize field
-            // Inspector.doms.$text.val(createdObj.getText())
-            // Inspector.doms.$fontSize.val(createdObj.get('fontSize'))
-        })
+        }
+
+        // when events below fires, inspectorArea will be updated
+        const events = ['selected', 'moving', 'scaling', 'resizing', 'rotating']
+        for (const e of events) {
+            fabricObj.on(`${e}`, updateControls)
+        }
+
+        /* for reference:
+        canvas.on({
+            'object:moving': updateControls,
+            'object:scaling': updateControls,
+            'object:resizing': updateControls,
+            'object:rotating': updateControls
+        }); */
     }
 
     static syncInspectorToCanvas(businessCanvas) {
-        Inspector.doms.$left.on('change', function() {
+        /* todo: finish others, note some property change cannot trigger fabricOjb change
+        angleControl.onchange = function() {
+            rect.setAngle(parseInt(this.value, 10)).setCoords();
+            canvas.renderAll();
+        }; */
+
+        Inspector.doms.props.$left.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             const left = parseInt($.trim($(this).val()), 10)
-            activeObj.set({left: left})
+            activeObj.set({ left: left })
             businessCanvas.canvas.renderAll()
         })
 
-        Inspector.doms.$top.on('change', function() {
+        Inspector.doms.props.$top.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             const top = parseInt($.trim($(this).val()), 10)
-            activeObj.set({top: top})
+            activeObj.set({ top: top })
             businessCanvas.canvas.renderAll()
         })
 
-        Inspector.doms.$text.on('change', function() {
+        Inspector.doms.props.$text.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             const text = $.trim($(this).val())
             activeObj.setText(text)
             businessCanvas.canvas.renderAll()
         })
 
-        Inspector.doms.$fontSize.on('change', function() {
+        Inspector.doms.props.$fontSize.on('change', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             let size = $.trim($(this).val())
             size = parseInt(size, 10)
-            activeObj.set({fontSize: size})
+            activeObj.set({ fontSize: size })
             businessCanvas.canvas.renderAll()
         })
 
-        Inspector.doms.$centerH.on('click', function() {
+        Inspector.doms.props.$centerH.on('click', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             activeObj.viewportCenterH()
         })
 
-        Inspector.doms.$centerV.on('click', function() {
+        Inspector.doms.props.$centerV.on('click', function() {
             const activeObj = businessCanvas.canvas.getActiveObject()
             activeObj.viewportCenterV()
         })
@@ -126,13 +157,13 @@ export default class Inspector {
 //         })
 //     }
 //
-//     syncCanvasToInspector(createdObj) {
-//         createdObj.on('selected', () => {
-//             this.doms.$left.val(createdObj.getLeft())
-//             this.doms.$top.val(createdObj.getTop())
+//     syncCanvasToInspector(fabricObj) {
+//         fabricObj.on('selected', () => {
+//             this.doms.$left.val(fabricObj.getLeft())
+//             this.doms.$top.val(fabricObj.getTop())
 //             this.doms.$inspectorArea.show()
-//             // this.doms.$text.val(createdObj.getText())
-//             // this.doms.$fontSize.val(createdObj.get('fontSize'))
+//             // this.doms.$text.val(fabricObj.getText())
+//             // this.doms.$fontSize.val(fabricObj.get('fontSize'))
 //         })
 //     }
 //

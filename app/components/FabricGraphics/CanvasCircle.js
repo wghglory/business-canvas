@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasCircle extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill,
@@ -12,12 +12,12 @@ export default class CanvasCircle extends Graphic {
         // customize
         radius = 100
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.radius = radius
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Circle({
+    createFabricObj() {
+        this.fabricObj = new fabric.Circle({
             radius: this.radius,
             // common
             top: this.top,
@@ -26,6 +26,6 @@ export default class CanvasCircle extends Graphic {
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
         })
-        return this.graphic
+        return this.fabricObj
     }
 }

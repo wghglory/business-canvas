@@ -15,7 +15,7 @@ export default class BusinessCanvas {
         }
 
         this.objects = []
-        this.createdObj
+        this.fabricObj
         this.canvas
 
         this.init()
@@ -42,12 +42,16 @@ export default class BusinessCanvas {
                 return
             }
 
-            _instance.createdObj = GraphicFactory.createGraphic(type)
+            // note: GraphicFactory.createGraphic(type) returns CanvasCircle or likewise, not fabric obj
+            // to get fabric obj: let fabricObj = graphic.createFabricObj()
+            const graphic = GraphicFactory.createGraphic(type)
+            const fabricObj = graphic.createFabricObj()
+            _instance.fabricObj = fabricObj
 
-            if (_instance.createdObj) {
-                Inspector.syncCanvasToInspector(_instance.createdObj)
+            if (_instance.fabricObj) {
+                Inspector.syncCanvasToInspector(graphic, fabricObj)
                 Inspector.syncInspectorToCanvas(_instance)
-                _instance.render(_instance.createdObj)
+                _instance.render(fabricObj)
             }
         })
     }
@@ -61,9 +65,10 @@ export default class BusinessCanvas {
                 const imageObj = new Image()
                 imageObj.src = event.target.result
                 imageObj.onload = () => {
-                    const image = new CanvasImage({imageObj, left: 100, top: 100, stroke: ''}).createGraphic()
+                    const graphic = new CanvasImage({ imageObj, left: 100, top: 100, stroke: '' })
+                    const image = graphic.createFabricObj()
 
-                    Inspector.syncCanvasToInspector(image)
+                    Inspector.syncCanvasToInspector(graphic, image)
                     _instance.render(image)
                     // canvas.renderAll();
                 }
@@ -72,8 +77,8 @@ export default class BusinessCanvas {
         })
     }
 
-    render(createdObj) {
-        this.canvas.add(createdObj)
-        this.objects.push(createdObj)
+    render(fabricObj) {
+        this.canvas.add(fabricObj)
+        this.objects.push(fabricObj)
     }
 }

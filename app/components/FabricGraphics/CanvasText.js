@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasText extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill = '#000',
@@ -15,7 +15,7 @@ export default class CanvasText extends Graphic {
         originY = 'center',
         text = '默认文字'
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.fontSize = fontSize
         this.originX = originX
         this.originY = originY
@@ -25,8 +25,8 @@ export default class CanvasText extends Graphic {
         this.fill = fill
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Text(this.text, {
+    createFabricObj() {
+        this.fabricObj = new fabric.Text(this.text, {
             fontSize: this.fontSize,
             originX: this.originX,
             originY: this.originY,
@@ -38,6 +38,6 @@ export default class CanvasText extends Graphic {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graphic
+        return this.fabricObj
     }
 }

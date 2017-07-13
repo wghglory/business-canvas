@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasLine extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill,
@@ -15,15 +15,15 @@ export default class CanvasLine extends Graphic {
         x2,
         y2
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.x1 = x1
         this.x2 = x2
         this.y1 = y1
         this.y2 = y2
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Line([
+    createFabricObj() {
+        this.fabricObj = new fabric.Line([
             this.x1, this.y1, this.x2, this.y2
         ], {
             // common
@@ -33,6 +33,6 @@ export default class CanvasLine extends Graphic {
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
         })
-        return this.graphic
+        return this.fabricObj
     }
 }

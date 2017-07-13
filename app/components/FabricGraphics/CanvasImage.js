@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasImage extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill,
@@ -12,13 +12,13 @@ export default class CanvasImage extends Graphic {
         // customize
         imageObj
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.imageObj = imageObj
         this.stroke = stroke
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Image(this.imageObj, {
+    createFabricObj() {
+        this.fabricObj = new fabric.Image(this.imageObj, {
             // common
             top: this.top,
             left: this.left,
@@ -26,6 +26,6 @@ export default class CanvasImage extends Graphic {
             stroke: this.stroke,
             strokeWidth: this.strokeWidth
         })
-        return this.graphic
+        return this.fabricObj
     }
 }

@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasTextbox extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill = '#000',
@@ -17,7 +17,7 @@ export default class CanvasTextbox extends Graphic {
         textAlign = 'center',
         fixedWidth = 150
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.fontSize = fontSize
         this.width = width
         this.height = height
@@ -29,8 +29,8 @@ export default class CanvasTextbox extends Graphic {
         this.fill = fill
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Textbox(this.text, {
+    createFabricObj() {
+        this.fabricObj = new fabric.Textbox(this.text, {
             fontSize: this.fontSize,
             width: this.width,
             height: this.height,
@@ -44,6 +44,6 @@ export default class CanvasTextbox extends Graphic {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graphic
+        return this.fabricObj
     }
 }

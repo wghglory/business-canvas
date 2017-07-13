@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasTriangle extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill,
@@ -14,14 +14,14 @@ export default class CanvasTriangle extends Graphic {
         height = 100,
         originX = 'center',
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.width = width
         this.height = height
         this.originX = originX
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Triangle({
+    createFabricObj() {
+        this.fabricObj = new fabric.Triangle({
             width: this.width,
             height: this.height,
             originX: this.originX,
@@ -33,6 +33,6 @@ export default class CanvasTriangle extends Graphic {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graphic
+        return this.fabricObj
     }
 }

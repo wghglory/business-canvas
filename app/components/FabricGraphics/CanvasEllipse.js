@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasEllipse extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill,
@@ -13,13 +13,13 @@ export default class CanvasEllipse extends Graphic {
         rx = 100,
         ry = 50
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.rx = rx
         this.ry = ry
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Ellipse({
+    createFabricObj() {
+        this.fabricObj = new fabric.Ellipse({
             rx: this.rx,
             ry: this.ry,
             // common
@@ -30,6 +30,6 @@ export default class CanvasEllipse extends Graphic {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graphic
+        return this.fabricObj
     }
 }

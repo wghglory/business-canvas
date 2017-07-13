@@ -3,7 +3,7 @@ import { fabric } from 'fabric'
 
 export default class CanvasSquare extends Graphic {
     constructor({
-        graphic,
+        fabricObj,
         top,
         left,
         fill,
@@ -12,13 +12,13 @@ export default class CanvasSquare extends Graphic {
         // customize
         length = 100
     }) {
-        super(graphic, top, left, fill, stroke, strokeWidth)
+        super(fabricObj, top, left, fill, stroke, strokeWidth)
         this.width = length
         this.height = length
     }
 
-    createGraphic() {
-        this.graphic = new fabric.Rect({
+    createFabricObj() {
+        this.fabricObj = new fabric.Rect({
             width: this.width,
             height: this.height,
             // common
@@ -29,6 +29,6 @@ export default class CanvasSquare extends Graphic {
             strokeWidth: this.strokeWidth
         })
 
-        return this.graphic
+        return this.fabricObj
     }
 }
