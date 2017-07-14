@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
 }
@@ -31,7 +32,8 @@ html, body {
     border: 1px solid #aaa;
 }
 
-#mainCanvas {
+#mainCanvas,
+#previewCanvas {
     width: 100%;
     height: 100%;
 }
@@ -45,4 +47,8 @@ html, body {
 
 .hidden {
     display: none;
+}
+
+.preview {
+    margin: 20px auto;
 }

@@ -10,8 +10,10 @@ export default class BusinessCanvas {
         this.doms = {
             $canvasArea: $('.canvas-area'),
             $mainCanvas: $('#mainCanvas'),
+            $previewCanvas: $('#previewCanvas'),
             $creators: $('.graphic-object'),
-            $fileUploader: $('input[type=file]')
+            $fileUploader: $('input[type=file]'),
+            $save: $('.save') // this might be in other classes, now only for demo purpose
         }
 
         this.objects = []
@@ -24,12 +26,14 @@ export default class BusinessCanvas {
     init() {
         // set canvas width and height
         this.doms.$mainCanvas.attr('width', this.doms.$canvasArea.width()).attr('height', this.doms.$canvasArea.height())
+        this.doms.$previewCanvas.attr('width', this.doms.$canvasArea.width()).attr('height', this.doms.$canvasArea.height())
         this.canvas = new fabric.Canvas('mainCanvas')
 
         Inspector.bindDeleteObject(this.canvas)
 
         this.bindToolsClick()
         this.bindImageUpload()
+        this.bindSave(this.canvas)
     }
 
     bindToolsClick() {
@@ -80,5 +84,19 @@ export default class BusinessCanvas {
     render(fabricObj) {
         this.canvas.add(fabricObj)
         this.objects.push(fabricObj)
+    }
+
+    bindSave(canvas) {
+        const _canvas = canvas
+        this.doms.$save.on('click', (function() {
+            const data = _canvas.toObject()
+            // todo: save to json or database
+            this.showPreview(data)
+        }).bind(this))
+    }
+
+    showPreview(data) {
+        var canvas = new fabric.Canvas('previewCanvas')
+        canvas.loadFromJSON(data)
     }
 }
