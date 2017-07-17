@@ -4,12 +4,16 @@ body {
     padding: 0;
 }
 
+.container {
+    width: 1080px;
+    margin: 10px auto;
+}
+
 .editor {
-    padding: 16px;
+    display: flex;
 }
 
 .tools {
-    float: left;
     vertical-align: middle;
     background: #dfdfdf;
 }
@@ -26,20 +30,13 @@ body {
 }
 
 .canvas-area {
-    float: left;
     width: 640px;
-    height: 640px;
-    border: 1px solid #aaa;
-}
-
-#mainCanvas,
-#previewCanvas {
-    width: 100%;
-    height: 100%;
+     height: 500px; 
+    /* height: 640px; */
+     border: 1px solid #aaa; 
 }
 
 .inspector-area {
-    float: left;
     background: #dfdfdf;
     padding: 8px;
     display: none;

@@ -28,6 +28,7 @@ export default class BusinessCanvas {
         this.doms.$mainCanvas.attr('width', this.doms.$canvasArea.width()).attr('height', this.doms.$canvasArea.height())
         this.doms.$previewCanvas.attr('width', this.doms.$canvasArea.width()).attr('height', this.doms.$canvasArea.height())
         this.canvas = new fabric.Canvas('mainCanvas')
+        this.previewCanvas = new fabric.Canvas('previewCanvas')
 
         Inspector.bindDeleteObject(this.canvas)
 
@@ -96,7 +97,6 @@ export default class BusinessCanvas {
     }
 
     showPreview(data) {
-        var canvas = new fabric.Canvas('previewCanvas')
-        canvas.loadFromJSON(data)
+        this.previewCanvas.loadFromJSON(data)
     }
 }

@@ -7,87 +7,90 @@
 </head>
 
 <body>
-    <div class="editor">
-        <nav class="tools">
-            <a href="javascript:" class="graphic-object" type="Line">直线</a>
-            <a href="javascript:" class="graphic-object" type="Circle">圆</a>
-            <a href="javascript:" class="graphic-object" type="Ellipse">椭圆</a>
-            <a href="javascript:" class="graphic-object" type="Triangle">三角</a>
-            <a href="javascript:" class="graphic-object" type="Rect">矩形</a>
-            <a href="javascript:" class="graphic-object" type="Square">正方形</a>
-            <a href="javascript:" class="graphic-object" type="Image">图片</a>
-            <a href="javascript:" class="graphic-object" type="Text">文字</a>
-            <a href="javascript:" class="graphic-object" type="Textbox">文本框</a>
-        </nav>
-        <input type="file" name="image" class="hidden" />
-        <section class="canvas-area">
-            <canvas id="mainCanvas"></canvas>
+    <div class="container">
+        <section class="editor">
+            <nav class="tools">
+                <a href="javascript:" class="graphic-object" type="Line">直线</a>
+                <a href="javascript:" class="graphic-object" type="Circle">圆</a>
+                <a href="javascript:" class="graphic-object" type="Ellipse">椭圆</a>
+                <a href="javascript:" class="graphic-object" type="Triangle">三角</a>
+                <a href="javascript:" class="graphic-object" type="Rect">矩形</a>
+                <a href="javascript:" class="graphic-object" type="Square">正方形</a>
+                <a href="javascript:" class="graphic-object" type="Image">图片</a>
+                <a href="javascript:" class="graphic-object" type="Text">文字</a>
+                <a href="javascript:" class="graphic-object" type="Textbox">文本框</a>
+                <button class="save">保存/显示预览</button>
+            </nav>
+            <input type="file" name="image" class="hidden" />
+            <main class="canvas-area">
+                <canvas id="mainCanvas"></canvas>
+            </main>
+            <aside class="inspector-area">
+                <div class="inspector inspector-text">
+                    <div>
+                        <label>X: <input type="number" class="left"></label>
+                    </div>
+                    <div>
+                        <label>Y: <input type="number" class="top"></label>
+                    </div>
+                    <div>
+                        <label>宽度：<input type="number" class="width"></label>
+                    </div>
+                    <div>
+                        <label>高度：<input type="number" class="height"></label>
+                    </div>
+                    <div>
+                        <label>填充：<input type="color" class="fill"></label>
+                    </div>
+                    <div>
+                        <label>轮廓颜色：<input type="color" class="stroke"></label>
+                    </div>
+                    <div>
+                        <label>轮廓宽度：<input type="number" class="strokeWidth"></label>
+                    </div>
+                    <div>
+                        <label>角度：<input type="number" class="angle"></label>
+                    </div>
+                    <div>
+                        <label>缩放-x：<input type="number" class="scale-x"></label>
+                    </div>
+                    <div>
+                        <label>缩放-y：<input type="number" class="scale-y"></label>
+                    </div>
+                    <div>
+                        <label>半径-x(圆)：<input type="number" class="radius-x"></label>
+                    </div>
+                    <div>
+                        <label>半径-y(圆)：<input type="number" class="radius-y"></label>
+                    </div>
+                    <div>
+                        <label>半径-x(椭圆)：<input type="number" class="rx"></label>
+                    </div>
+                    <div>
+                        <label>半径-y(椭圆)：<input type="number" class="ry"></label>
+                    </div>
+                    <div>
+                        <label>文字内容：<input type="text" class="text"></label>
+                    </div>
+                    <div>
+                        <label>字体大小：<input type="number" class="font-size"></label>
+                    </div>
+                    <div>
+                        <label>字体：<input type="text" class="font-family"></label>
+                    </div>
+                    <div>
+                        <button class="center-h">水平居中</button>
+                        <button class="center-v">垂直居中</button>
+                        <button class="delete">Delete</button>
+                    </div>
+                </div>
+            </aside>
         </section>
-        <section class="inspector-area">
-            <div class="inspector inspector-text">
-                <div>
-                    <label>X: <input type="number" class="left"></label>
-                </div>
-                <div>
-                    <label>Y: <input type="number" class="top"></label>
-                </div>
-                <div>
-                    <label>宽度：<input type="number" class="width"></label>
-                </div>
-                <div>
-                    <label>高度：<input type="number" class="height"></label>
-                </div>
-                <div>
-                    <label>填充：<input type="color" class="fill"></label>
-                </div>
-                <div>
-                    <label>轮廓颜色：<input type="color" class="stroke"></label>
-                </div>
-                <div>
-                    <label>轮廓宽度：<input type="number" class="strokeWidth"></label>
-                </div>
-                <div>
-                    <label>角度：<input type="number" class="angle"></label>
-                </div>
-                <div>
-                    <label>缩放-x：<input type="number" class="scale-x"></label>
-                </div>
-                <div>
-                    <label>缩放-y：<input type="number" class="scale-y"></label>
-                </div>
-                <div>
-                    <label>半径-x(圆)：<input type="number" class="radius-x"></label>
-                </div>
-                <div>
-                    <label>半径-y(圆)：<input type="number" class="radius-y"></label>
-                </div>
-                <div>
-                    <label>半径-x(椭圆)：<input type="number" class="rx"></label>
-                </div>
-                <div>
-                    <label>半径-y(椭圆)：<input type="number" class="ry"></label>
-                </div>
-                <div>
-                    <label>文字内容：<input type="text" class="text"></label>
-                </div>
-                <div>
-                    <label>字体大小：<input type="number" class="font-size"></label>
-                </div>
-                <div>
-                    <label>字体：<input type="text" class="font-family"></label>
-                </div>
-                <div>
-                    <button class="center-h">水平居中</button>
-                    <button class="center-v">垂直居中</button>
-                    <button class="delete">Delete</button>
-                    <button class="save">保存</button>
-                </div>
-            </div>
-        </section>
-    </div>
-    <div class="preview">
-        <section class="canvas-area">
-            <canvas id="previewCanvas"></canvas>
+        <section class="preview">
+            <h2>预览区</h2>
+            <main class="canvas-area">
+                <canvas id="previewCanvas"></canvas>
+            </main>
         </section>
     </div>
 </body>
