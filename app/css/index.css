@@ -31,21 +31,34 @@ body {
 
 .canvas-area {
     width: 640px;
-     height: 500px; 
+    height: 500px;
     /* height: 640px; */
-     border: 1px solid #aaa; 
+    border: 1px solid #aaa;
 }
 
 .inspector-area {
     background: #dfdfdf;
     padding: 8px;
-    display: none;
+    /* display: none; */
 }
 
 .hidden {
     display: none;
 }
 
+.preview-area {
+    display: flex;
+}
+
 .preview {
     margin: 20px auto;
+}
+
+.data-area {
+    width: 420px;
+    height: 480px;
+    padding: 10px;
+    word-wrap: break-word;
+    overflow: hidden;
+    overflow-y: auto;
 }

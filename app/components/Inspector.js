@@ -9,7 +9,6 @@ export default class Inspector {
         const _doms = {
             $inspectorArea: $('.inspector-area'),
             $inspector: $('.inspector'),
-            $deleteButton: $('.delete'),
             props: {}
         }
         _doms.props.$left = _doms.$inspector.find('.left')
@@ -39,14 +38,6 @@ export default class Inspector {
             $d.val('')
         }
         Inspector.doms.$inspectorArea.hide()
-    }
-
-    static bindDeleteObject(canvas) {
-        Inspector.doms.$deleteButton.on('click', () => {
-            const currentObj = canvas.getActiveObject()
-            currentObj && currentObj.remove()
-            Inspector.clearInspector()
-        })
     }
 
     static syncCanvasToInspector(graphic, fabricObj) {
