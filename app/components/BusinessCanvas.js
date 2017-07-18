@@ -19,13 +19,12 @@ export default class BusinessCanvas {
             $delete: $('.delete'),
             $clear: $('.clear'),
             $save: $('.save'), // this might be in other classes, now only for demo purpose
-            $moveup: $('.moveup'),
-            $movedown: $('.movedown')
+            $bringFront: $('.bringFront'),
+            $sendBack: $('.sendBack')
         }
 
-        this.objects = []
+        // this.objects = []
         this.fabricObj
-        this.fabricObjs = []
         this.canvas
         this.previewCanvas
 
@@ -42,13 +41,13 @@ export default class BusinessCanvas {
         this.bindToolsClick()
         this.bindImageUpload()
 
-        this.bindDeselectAll()
+        this.bindDeselectAll(this.canvas)
         this.bindSelectAll(this.canvas)
         this.bindClear(this.canvas)
         this.bindDeleteObject(this.canvas, Inspector)
         this.bindSave(this.canvas)
 
-        this.bindMoveUpOrDown(this.canvas)
+        this.bindBringFrontAndSendBack(this.canvas)
     }
 
     bindToolsClick() {
@@ -98,7 +97,7 @@ export default class BusinessCanvas {
 
     render(fabricObj) {
         this.canvas.add(fabricObj)
-        this.objects.push(fabricObj)
+        // this.objects.push(fabricObj)
     }
 
     bindClear(canvas) {
@@ -109,29 +108,32 @@ export default class BusinessCanvas {
     }
 
     bindDeleteObject(canvas, Inspector) {
-        const _instance = this
         this.doms.$delete.on('click', () => {
             const currentObj = canvas.getActiveObject()
+
             if (currentObj) {
-                currentObj.remove()
+                canvas.remove(currentObj)
+                // currentObj.remove()
             } else {
-                for (let o of _instance.fabricObjs) {
-                    o.remove()
+                const group = canvas.getActiveGroup()
+                if (group) {
+                    canvas.discardActiveGroup()
+                    group.forEachObject((o) => {
+                        canvas.remove(o)
+                    })
                 }
-                canvas.renderAll()
             }
             Inspector.clearInspector()
         })
     }
 
-    // todo: select once, add another new, select again...(bug: position changes)
     bindSelectAll(canvas) {
-        canvas.deactivateAll()
 
-        const _instance = this
         this.doms.$selectAll.on('click', () => {
-            const objects = canvas.getObjects().map(function(o) {
-                _instance.fabricObjs.push(o)
+            // note: bug solve: select once, add another new, select again...(bug: position changes)
+            canvas.deactivateAll()
+
+            const objects = canvas.getObjects().map((o) => {
                 return o.set('active', true)
             })
 
@@ -141,25 +143,21 @@ export default class BusinessCanvas {
             })
 
             canvas.fabricObj = null
-            // canvas._activeObject = null
 
             canvas.setActiveGroup(group.setCoords()).renderAll()
         })
 
     }
 
-    bindDeselectAll() {
-        const _instance = this
+    bindDeselectAll(canvas) {
         this.doms.$deselectAll.on('click', () => {
-            _instance.canvas.deactivateAll().renderAll()
+            canvas.deactivateAll().renderAll()
         })
     }
 
     bindSave(canvas) {
-        const _canvas = canvas
         this.doms.$save.on('click', (function() {
-            const data = JSON.stringify(_canvas)
-            // todo: save to json or database
+            const data = JSON.stringify(canvas)
             this.showPreview(data)
         }).bind(this))
     }
@@ -170,17 +168,17 @@ export default class BusinessCanvas {
     }
 
     // bring/send did change layer, but UI doesn't change, to fix this: new fabric.Canvas('mainCanvas', { preserveObjectStacking: true })
-    bindMoveUpOrDown(canvas) {
-        this.doms.$moveup.on('click', () => {
+    bindBringFrontAndSendBack(canvas) {
+        this.doms.$bringFront.on('click', () => {
             const activeObj = canvas.getActiveObject()
-            canvas.bringForward(activeObj, true)
-            // this.canvas.bringToFront(activeObj)
+            // canvas.bringForward(activeObj, true)  // 上移一层
+            canvas.bringToFront(activeObj) // 最前
         })
 
-        this.doms.$movedown.on('click', () => {
-            const activeObj = this.canvas.getActiveObject()
-            this.canvas.sendBackwards(activeObj, true)
-            // this.canvas.sendToBack(activeObj)
+        this.doms.$sendBack.on('click', () => {
+            const activeObj = canvas.getActiveObject()
+            // canvas.sendBackwards(activeObj, true)
+            canvas.sendToBack(activeObj)
         })
     }
 }
